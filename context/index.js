@@ -1,3 +1,7 @@
+// * 'global window object'
+// * 'nameOfObject'
+// * 'instance of nameOfClassInstance'
+
 const context = {
   exerciseA() {
     const fly = () => {
@@ -16,11 +20,19 @@ const context = {
 
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+
+    // This `this` is not pointing to any objects or instances, so it has to be pointing at the global window object.
+    // cypress.io
+    // graph.js
+    // chart.js
+
+    // write tests together, then build separately
+      // method input/output is what
   },
 
   exerciseB() {

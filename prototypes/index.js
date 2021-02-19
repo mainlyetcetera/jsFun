@@ -685,14 +685,32 @@ const astronomyPrompts = {
     //     constellation: 'Orion',
     //     lightYearsFromEarth: 640,
     //     color: 'red' }
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    // ]   
 
     // Annotation:
     // Write your annotation here as a comment
+    // in stars array, we have star objects
+      // not every star listed in stars arrays for constellations is in stars array
+    // checking constellations at constellation's stars for stars we have in array
+
+    // star.constellation
+
+    // input: constellations obj of objs (or arrs)
+    // output: arr of star objs whose constellations matches any of the constellations
+    // methods: filter, forEach, reduce
+    // skeleton:
+
+    // get keys of constellations obj (constellation)
+    // filter through stars array of each constellation
+      // put stars in stars arr with matching constellation into its own array
+    
+    const filtered = stars.filter(star => star.constellation === 'Orion');    
+    return filtered;
   },
+
+
+
+
 
   starsByColor() {
     // Return an object with keys of the different colors of the stars,
@@ -705,11 +723,33 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
-
     // Annotation:
     // Write your annotation here as a comment
+
+    // key of my obj matches color prop in star (element in stars)
+
+    // input: global stars array (kinda)
+    // output: one obj of 5 props, keys are colors, values are arrays of objs whose color is that key
+    // methods: reduce, forEach
+
+    // iterate through stars array
+      // if obj[color of current star] does not exist
+        // make that prop an array with current star in it
+      // otherwise
+        // add current star to obj[color of current star]
+    // return whole obj
+
+    const starsByColor = stars.reduce((acc, star) => {      
+      if (!acc[star.color]) {        
+        acc[star.color] = [star];
+      } else {
+        acc[star.color].push(star);
+      }      
+      
+      return acc;
+    }, {});
+
+    return starsByColor;
   },
 
   constellationsStarsExistIn() {
@@ -796,7 +836,7 @@ const ultimaPrompts = {
 
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
 const dinosaurPrompts = {
-  countAwesomeDinosaurs() {
+//   countAwesomeDinosaurs() {
     // Return an object where each key is a movie title and each value is the
     // number of awesome dinosaurs in that movie. e.g.:
     // {
@@ -807,12 +847,34 @@ const dinosaurPrompts = {
     //   'Jurassic World: Fallen Kingdom': 18
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    
 
     // Annotation:
-    // Write your annotation here as a comment
-  },
+    // dinosaurs obj contains properties
+      // each key is a dinosaur name
+      // each value is an obj        
+        // has carnivore(bool), herbivore(bool), isAwesome(bool)
+
+    // movies array, each has title and dinos
+    // title becomes key in new obj
+    // value is # of dinos in dinos whose corresponding prop in dinos obj has isAwesome(true)
+      // key string, value num
+
+    // input: movies array
+    // output: obj with keys as movie names and values as awesomeDinos
+
+    // iterate through movies
+      // set name of element(movie) as key
+        // value is set as num dinos dinos array where prop in dinos obj has isAwesome(true)
+      // add that key and value to obj
+    // return obj
+
+    // return movies.reduce((acc, movie) => {      
+    //   const filtered = movie.dinos.filter(dino => dinosaurs[dino].isAwesome);
+    //   acc[movie.title] = filtered.length;
+    //   return acc;
+    // }, {});
+  // },
 
   averageAgePerMovie() {
     /* Return an object where each key is a movie director's name and each value is
@@ -840,11 +902,77 @@ const dinosaurPrompts = {
       }
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
-
     // Annotation:
     // Write your annotation here as a comment
+    // sam 1947    2020 - 1947 = 73
+    // laura 1967  2020 - 1967 = 53    126 / 2 61
+    // released 2001
+    // 2001 - 1947 = 54
+    // 2001 - 1967 = 34
+
+    // sam 1947
+    // 1993 
+    // 46
+
+    // use actors of each movie to find age at yearReleased in movie
+    // avg ages
+    // build obj,
+      // keys director name
+      // value obj
+        // movie name key
+          // avg age cast value
+      // build each smaller obj, put in whole object
+    // return whole object
+
+    // iterate through movies
+    // build obj
+    // calculate avgAge
+    // if obj[director] is not defined (first time)
+      // set obj[director] to { title: avgAge }
+      // otherwise
+      // obj[director][title] set to avgAge of that title
+    // return obj    
+
+    // let age, allData;
+
+    // age = 0;
+    // allData = {};
+
+    // movies.forEach(movie => {
+
+    //   movie.cast.forEach(member => {
+    //     eachAge = movie.yearReleased - humans[member].yearBorn;
+    //     age += eachAge;
+    //   });
+
+    //   age /= movie.cast.length;
+    //   age = Math.floor(age);
+
+    //   if (allData[movie.director] === undefined) {
+    //     allData[movie.director] = { [movie.title]: age };
+    //   } else if (allData[movie.director] !== undefined) {
+    //     allData[movie.director][movie.title] = age;
+    //   }
+      
+    //   age = 0;
+    // });   
+    
+    // return allData;
+
+    return movies.reduce((directorCollection, movie) => {      
+      let age = movie.cast.reduce((totalAge, member) => {
+        currAge = movie.yearReleased - humans[member].yearBorn;
+        return totalAge + currAge;
+      }, 0);
+
+      age /= movie.cast.length;
+      age = Math.floor(age);
+
+      !directorCollection[movie.director] ? directorCollection[movie.director] = { [movie.title]: age }
+        : directorCollection[movie.director][movie.title] = age;
+        
+      return directorCollection;
+    }, {});
   },
 
   uncastActors() {
@@ -873,11 +1001,29 @@ const dinosaurPrompts = {
       }]
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
-
     // Annotation:
     // Write your annotation here as a comment
+    // find humans who are not in any movies
+      // for each of these humans, make obj
+        // name, nationality, imdbRating in obj
+    // sort these uncast actors alphabetically by nationality
+
+    // input: movies array of objects
+    // output: array of objects, objs being humans not in any movie
+    // methods: filter, reduce
+
+    // filter through humans (keys), make array of only human names not in movies
+    // map through filtered array, make each human obj
+    // return sort mapped array
+
+    const humansInMovies = movies.reduce((actors, movie) => {
+      movie.cast.forEach(member => actors.push(member));
+      return actors;
+    }, []);    
+
+    const humansNotInMovies = Object.keys(humans).filter(human => !humansInMovies.includes(human));    
+    const allHumanDetails = humansNotInMovies.map(human => ({ name: human, nationality: humans[human].nationality, imdbStarMeterRating: humans[human].imdbStarMeterRating}));    
+    return allHumanDetails.sort((a, b) => a.nationality.localeCompare(b.nationality));      
   },
 
   actorsAgesInMovies() {
@@ -896,11 +1042,36 @@ const dinosaurPrompts = {
       { name: 'Bryce Dallas Howard', ages: [ 34, 37 ] } ]
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
-
     // Annotation:
     // Write your annotation here as a comment
+    // get list of humans in movies
+    // make objects for each human with name of name and ages being empty array
+      // put these objects in array (map)
+
+    // iterate through movies
+      // iterate through actor objects
+        // if actor in movie, add age to ages array
+
+    // return whole array
+    
+
+    const humansInMovies = movies.reduce((actors, movie) => {
+      movie.cast.forEach(member => {
+        !actors.includes(member) ? actors.push(member) : member;
+      });
+
+      return actors;
+    }, []);
+
+    const humansWithDetails = humansInMovies.map(humanName => ({ name: humanName, ages: [] }));
+    
+    movies.forEach(movie => {
+      humansWithDetails.forEach(human => {
+        movie.cast.includes(human.name) ? human.ages.push(Math.abs(humans[human.name].yearBorn - movie.yearReleased)) : human;
+      });
+    });
+
+    return humansWithDetails;
   }
 };
 

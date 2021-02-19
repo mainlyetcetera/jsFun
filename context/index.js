@@ -26,13 +26,7 @@ const context = {
     // Annotation:
     // Write your annotation here as a comment
 
-    // This `this` is not pointing to any objects or instances, so it has to be pointing at the global window object.
-    // cypress.io
-    // graph.js
-    // chart.js
-
-    // write tests together, then build separately
-      // method input/output is what
+    // This `this` is not pointing to any objects or instances, so it has to be pointing at the global window object.   
   },
 
   exerciseB() {
@@ -42,11 +36,12 @@ const context = {
     }
 
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // I believe this is the 'global window object' because, though the variable vlaue is located in a function, this function is not a constructor.
   },
 
   exerciseC() {
@@ -61,11 +56,12 @@ const context = {
     el.addEventListener('click', car.getInfo);
 
     // What is the value of `this` when a user clicks on our element and car.getInfo() is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'el';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // 'el' is the context of this as the car.getInfo() function is called to log `this` of the dom element
   },
 
   exerciseD() {
@@ -84,11 +80,12 @@ const context = {
     var breed = dog.getBreed();
 
     // What is the value of `this` when we call breed()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // I believe the context is the global window object because the call to `this` is inside a separate block
   },
 
   exerciseE() {
@@ -100,11 +97,12 @@ const context = {
 
 
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // this context is the global window object because arrow functions do not bind `this` to use that block
   },
 
   exerciseF() {
@@ -123,11 +121,12 @@ const context = {
     const storm = new Hero('Ororo', 'weather control', true);
 
     // What is the value of `this` when we call storm.identifyHero()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'instance of Hero';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // `this` is pointing to the instance as instances have their own block context
   },
 
   exerciseG() {
@@ -151,11 +150,12 @@ const context = {
 
 
     // What is the value of `this` when we call monopoly.restart()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // I think `this` is pointing to the global window object because setTimeout() is a function that points at the global window, so `this` also points to it now
   },
 
   exerciseH() {
@@ -171,11 +171,13 @@ const context = {
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'obj';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // I believe `this` points at the object obj because obj.method() reassigns obj.arrowFunction (this.arrowFunction) from `null` to be the arrow function which returns this.
+    // ES6 functions cannot hold the `this` context on their own, so it defaults to using the block containing it, which is obj.
   },
 
   exerciseI() {
@@ -194,11 +196,12 @@ const context = {
     }, poets);
 
     // What is the value of `this` that gets returned on each iteration of poets.map()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'poets';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment. Annotation should include explanation regarding the second argument of `poets` that is being passed
+    // `this` is pointing to the `poets` array due to the use of `thisArg` given to the callback function which sets what `this` points to
   },
 
   exerciseJ() {
@@ -208,7 +211,7 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'el';
     return result;
 
     // Annotation:
@@ -224,7 +227,7 @@ const context = {
     };
 
     // What is the value of `this` when we call store.sellMe()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'store';
     return result;
 
     // Annotation:
@@ -244,7 +247,7 @@ const context = {
     };
 
     // What is the value of `this` when we call dog.getBreed()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'dog';
     return result;
 
     // Annotation:
@@ -267,7 +270,7 @@ const context = {
     }
 
     // What is the value of `this` when we call makeBirdNoise.call(robert);
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'robert';
     return result;
 
     // Annotation:
@@ -293,11 +296,12 @@ const context = {
     var firstBird = new Bird('Calvin', 'budgie');
 
     // What is the value of `this` when we call firstBird.delayNoise();
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'instance of Bird';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // this will use the instance of a class if called that way
   },
 
   exerciseO() {
@@ -309,11 +313,12 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our button element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
+    // this `this` is not pointing to an object as a method, so goes global
   },
 
   exerciseP() {
@@ -324,12 +329,13 @@ const context = {
       }
     };
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = 'global window object';
     return result;
 
     // What is the value of `this` when we call child.scream();
     // Annotation:
     // Write your annotation here as a comment
+    // the ES6 function decides its context upon creation, and `this` is only pointing to the function, not the object, so global
   }
 };
 

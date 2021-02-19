@@ -34,6 +34,7 @@ const scope = {
 
     // Annotation:
     // Write your annotation here as a comment
+    // start with paul, ben, tom as pa, pb, pc
   },
 
   exerciseB() {

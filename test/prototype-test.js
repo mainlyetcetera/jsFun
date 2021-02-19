@@ -529,7 +529,7 @@ describe("PROTOTYPES", () => {
       }])
     });
     
-    it("starsByColor", () => {
+    it.only("starsByColor", () => {
       const e = astronomyPrompts.starsByColor();
 
       expect(e).to.deep.equal({
